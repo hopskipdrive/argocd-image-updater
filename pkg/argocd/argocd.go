@@ -888,6 +888,8 @@ func getApplicationType(app *argocdapi.Application, wbc *WriteBackConfig) Applic
 		return ApplicationTypeKustomize
 	} else if sourceType == argocdapi.ApplicationSourceTypeHelm {
 		return ApplicationTypeHelm
+	} else if os.Getenv("ENABLE_HELMFILE_PLUGIN") == "true" {
+		return ApplicationTypeHelm
 	} else {
 		return ApplicationTypeUnsupported
 	}
@@ -900,6 +902,11 @@ func getApplicationSourceType(app *argocdapi.Application, wbc *WriteBackConfig) 
 			return argocdapi.ApplicationSourceTypeKustomize
 		}
 	}
+
+	if os.Getenv("ENABLE_HELMFILE_PLUGIN") == "true" {
+		return v1alpha1.ApplicationSourceTypeHelm
+	}
+	
 	if app.Spec.HasMultipleSources() {
 		for _, st := range app.Status.SourceTypes {
 			if st == argocdapi.ApplicationSourceTypeHelm {
