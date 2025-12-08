@@ -1,5 +1,5 @@
 # Build the manager binary
-FROM golang:1.24 AS builder
+FROM 564365460806.dkr.ecr.us-east-2.amazonaws.com/docker-hub/library/golang:1.24 AS builder
 ARG TARGETOS
 ARG TARGETARCH
 
@@ -16,7 +16,7 @@ COPY . .
 RUN mkdir -p dist && \
 	OS=${TARGETOS:-linux} ARCH=${TARGETARCH} make build
 
-FROM alpine:3.22
+FROM 564365460806.dkr.ecr.us-east-2.amazonaws.com/docker-hub/library/alpine:3.22
 
 RUN apk update && \
     apk upgrade && \
