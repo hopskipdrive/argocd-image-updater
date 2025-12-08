@@ -1,0 +1,4 @@
+include:
+  - project: HopSkipDrive/ci-templates
+    file: ArgoCDImageUpdater.gitlab-ci.yml
+    ref: main
