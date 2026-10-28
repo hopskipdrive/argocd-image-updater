@@ -905,7 +905,7 @@ func getApplicationSourceType(app *argocdapi.Application, wbc *WriteBackConfig) 
 	}
 
 	if os.Getenv("ENABLE_HELMFILE_PLUGIN") == "true" {
-		return v1alpha1.ApplicationSourceTypeHelm
+		return argocdapi.ApplicationSourceTypeHelm
 	}
 	
 	if app.Spec.HasMultipleSources() {
